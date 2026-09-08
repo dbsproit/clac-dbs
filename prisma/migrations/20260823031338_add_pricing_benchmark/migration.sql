@@ -1,0 +1,20 @@
+-- CreateTable
+CREATE TABLE "PricingBenchmark" (
+    "id" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+    "laborPct" DOUBLE PRECISION NOT NULL,
+    "chemPct" DOUBLE PRECISION NOT NULL,
+    "machinePct" DOUBLE PRECISION NOT NULL,
+    "padsPct" DOUBLE PRECISION NOT NULL,
+    "waterPct" DOUBLE PRECISION NOT NULL,
+    "vehiclePct" DOUBLE PRECISION NOT NULL,
+    "maintPct" DOUBLE PRECISION NOT NULL,
+    "deprecPct" DOUBLE PRECISION NOT NULL,
+    "adminPct" DOUBLE PRECISION NOT NULL,
+    "commPct" DOUBLE PRECISION NOT NULL,
+    "profitPct" DOUBLE PRECISION NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PricingBenchmark_pkey" PRIMARY KEY ("id")
+);

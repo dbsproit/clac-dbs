@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Supabase (and other poolers) need a separate non-pooled connection for
+  // schema changes — DATABASE_URL stays pooled (pgbouncer, port 6543) for
+  // the app at runtime, DIRECT_URL (port 5432) is used only by `prisma
+  // migrate`/`db push`. Safe to leave DIRECT_URL unset for a plain
+  // non-pooled Postgres (e.g. the local Docker one) — Prisma just uses
+  // `url` for both in that case.
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  proposals    Proposal[]
+}
+
+/// Single shared row: rates & company info are the same for the whole team.
+model Settings {
+  id               String   @id @default("singleton")
+  costSettings     Json
+  company          Json
+  proposalDefaults Json?
+  updatedAt        DateTime @updatedAt
+}
+
+/// Team-shared registry of salespeople and their commission rate.
+model Salesperson {
+  id            String   @id @default(cuid())
+  name          String
+  commissionPct Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+/// Master Pricing Reference Table (Policy 01 companion): how a healthy job
+/// of each service category should divide its selling price. Every row
+/// should total 100 across the % columns. Editable from the /admin area.
+model PricingBenchmark {
+  id         String   @id @default(cuid())
+  label      String
+  laborPct   Float
+  chemPct    Float
+  machinePct Float
+  padsPct    Float
+  waterPct   Float
+  vehiclePct Float
+  maintPct   Float
+  deprecPct  Float
+  adminPct   Float
+  commPct    Float
+  profitPct  Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+/// Production rate per area type (sqft cleaned / labor hour), used by the
+/// Budget Calculator. Editable from Rates.
+model AreaType {
+  id             String   @id @default(cuid())
+  label          String
+  productionRate Float
+  rateRange      Float[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+/// Default rate/range/min-charge/productivity for each Extra Services
+/// catalog entry (window cleaning, pressure washing, ...). Individual lines
+/// can still override these; this is what a *new* line starts from.
+/// Editable from Rates.
+model SpecialtyService {
+  id             String   @id @default(cuid())
+  label          String
+  method         String // "area" | "unit" | "time"
+  defaultRate    Float
+  rateRange      Float[]
+  unitLabel      String
+  minCharge      Float
+  productionRate Float?
+  benchmarkId    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Proposal {
+  id          String   @id @default(cuid())
+  title       String
+  client      Json
+  estimate    Json
+  extraLines  Json
+  scope       Json
+  bid         Json
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

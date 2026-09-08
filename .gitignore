@@ -1,0 +1,16 @@
+/node_modules
+/.next
+/out
+/build
+.DS_Store
+*.pem
+npm-debug.log*
+.env
+.env*.local
+next-env.d.ts
+
+/src/generated/prisma
+
+# Claude Code local settings / TS build cache — machine-specific, not shared
+.claude/settings.local.json
+*.tsbuildinfo
