@@ -87,13 +87,13 @@ export default function RatesPage() {
           </>
         }
       />
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <Card
             title="Cost & margin model"
             subtitle="The buildup applied to labor across all modules"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Base wage" hint="Average hourly wage paid to a cleaner">
                 <NumberInput
                   value={settings.baseWage}

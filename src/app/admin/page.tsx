@@ -304,7 +304,7 @@ export default function AdminPage() {
           ) : undefined
         }
       />
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         <Link href="/admin/market-pricing">
           <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md">
             <div className="flex items-center gap-4">

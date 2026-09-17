@@ -82,7 +82,7 @@ export default function ScopeOfWorkPage() {
           </>
         }
       />
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         <Card title="Add an area">
           <div className="flex flex-wrap items-end gap-3">
             <Field label="Start from a template" className="w-56">

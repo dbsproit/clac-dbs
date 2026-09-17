@@ -60,7 +60,7 @@ export default function CalculatorPage() {
           </>
         }
       />
-      <div className="grid gap-6 p-8 xl:grid-cols-[1fr_380px]">
+      <div className="grid gap-6 p-4 sm:p-8 xl:grid-cols-[1fr_380px]">
         {/* -------------------------------------------------------- inputs */}
         <div className="space-y-6">
           <Card title="Client & property">

@@ -87,7 +87,7 @@ export default function SettingsPage() {
         subtitle="Company profile, proposal defaults, and your sales team"
         actions={<Button onClick={handleSave}>{saving ? "Saving…" : "Save settings"}</Button>}
       />
-      <div className="grid gap-6 p-8 lg:grid-cols-2">
+      <div className="grid gap-6 p-4 sm:p-8 lg:grid-cols-2">
         <Card
           title="Company profile"
           subtitle="Appears on BIDs and Scope of Work documents"
@@ -132,7 +132,7 @@ export default function SettingsPage() {
                 onChange={(e) => setCompany({ tagline: e.target.value })}
               />
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Contact name">
                 <TextInput
                   value={company.contactName}
@@ -178,7 +178,7 @@ export default function SettingsPage() {
                 onChange={(e) => setProposalDefaults({ proposalNumberPrefix: e.target.value })}
               />
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Valid for" hint="Days the quote stays valid">
                 <NumberInput
                   value={proposalDefaults.defaultValidForDays}
@@ -222,7 +222,7 @@ export default function SettingsPage() {
               isAdmin ? (
                 <div
                   key={p.id}
-                  className="grid grid-cols-[1fr_120px_auto] items-center gap-3"
+                  className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_120px_auto]"
                 >
                   <TextInput
                     value={p.name}
@@ -252,7 +252,7 @@ export default function SettingsPage() {
               <p className="py-2 text-sm text-slate-400">No salespeople yet.</p>
             )}
             {isAdmin && (
-              <div className="grid grid-cols-[1fr_120px_auto] items-center gap-3 border-t border-slate-100 pt-3">
+              <div className="grid grid-cols-1 items-center gap-3 border-t border-slate-100 pt-3 sm:grid-cols-[1fr_120px_auto]">
                 <TextInput
                   value={newSalesName}
                   onChange={(e) => setNewSalesName(e.target.value)}

@@ -73,7 +73,7 @@ function CrewSection({
         <Icon className="h-3.5 w-3.5" /> {label}
       </div>
       {members.map((m) => (
-        <div key={m.id} className="grid grid-cols-[1fr_120px_140px_auto] items-end gap-3">
+        <div key={m.id} className="grid grid-cols-1 items-end gap-3 sm:grid-cols-[1fr_120px_140px_auto]">
           <Field label="Name">
             <TextInput
               value={m.name}
@@ -166,21 +166,43 @@ export default function ExtraServicesPage() {
         }
         subtitle="Price add-on jobs for existing clients — cost buildup vs. live market rates"
         actions={
-          <div className="flex items-center gap-2">
-            <SaveProposalButton />
-            <Select value={picker} onChange={setPicker} className="w-56">
-              {specialtyServices.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.label}
-                </option>
-              ))}
-            </Select>
-            <Button onClick={() => picker && addExtraLine(picker)}>+ Add service</Button>
+          <div className="w-full sm:w-auto">
+            {/* mobile: dropdown full-width on its own row, buttons side by side below */}
+            <div className="flex flex-col gap-2 sm:hidden">
+              <Select value={picker} onChange={setPicker} className="w-full">
+                {specialtyServices.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.label}
+                  </option>
+                ))}
+              </Select>
+              <div className="flex gap-2">
+                <SaveProposalButton className="flex-1" />
+                <Button
+                  onClick={() => picker && addExtraLine(picker)}
+                  className="flex-1"
+                >
+                  + Add service
+                </Button>
+              </div>
+            </div>
+            {/* desktop: original single row */}
+            <div className="hidden sm:flex sm:items-center sm:gap-2">
+              <SaveProposalButton />
+              <Select value={picker} onChange={setPicker} className="w-56">
+                {specialtyServices.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.label}
+                  </option>
+                ))}
+              </Select>
+              <Button onClick={() => picker && addExtraLine(picker)}>+ Add service</Button>
+            </div>
           </div>
         }
       />
 
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         {extraLines.length === 0 && (
           <Card>
             <div className="flex flex-col items-center py-14 text-center">
@@ -338,7 +360,7 @@ export default function ExtraServicesPage() {
                       />
                     </Field>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     <Field label="Materials">
                       <NumberInput
                         value={line.materialsCost}
@@ -389,7 +411,7 @@ export default function ExtraServicesPage() {
                     <div className="flex items-center gap-1.5 border-t border-slate-200/70 pt-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
                       <Percent className="h-3.5 w-3.5" /> Salesperson
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <Field label="Sold by">
                         <Select
                           value={line.salespersonId}

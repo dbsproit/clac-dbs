@@ -53,7 +53,7 @@ export default function ProposalsPage() {
         subtitle="Every estimate the team has saved — shared across all devices"
         actions={<Button onClick={startNew}>+ New proposal</Button>}
       />
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         <Card>
           {proposals === null ? (
             <p className="py-6 text-center text-sm text-slate-400">Loading…</p>

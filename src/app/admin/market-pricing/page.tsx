@@ -144,7 +144,7 @@ export default function MarketPricingGuidePage() {
           </Link>
         }
       />
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-8">
         <Card title="Utah labor market context">
           <div className="space-y-3 text-sm text-slate-700">
             <p>

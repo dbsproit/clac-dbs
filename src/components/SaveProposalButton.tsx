@@ -2,11 +2,12 @@
 import { useApp } from "@/lib/store";
 import { Button } from "@/components/ui/primitives";
 
-export default function SaveProposalButton() {
+export default function SaveProposalButton({ className }: { className?: string }) {
   const { saving, currentProposalId, saveProposal } = useApp();
   return (
     <Button
       variant="secondary"
+      className={className}
       onClick={() =>
         saveProposal().catch((err) =>
           alert(err instanceof Error ? err.message : "Could not save proposal.")

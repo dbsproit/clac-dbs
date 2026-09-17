@@ -35,15 +35,21 @@ export default function BidPage() {
         title="BID / Proposal Builder"
         subtitle="Assemble a professional proposal from your estimate, scope and terms"
         actions={
-          <>
-            <SaveProposalButton />
-            <Button onClick={() => window.print()}>🖨 Print / Save PDF</Button>
-          </>
+          <div className="flex w-full gap-2 sm:w-auto">
+            <SaveProposalButton className="flex-1 sm:flex-none" />
+            <Button
+              onClick={() => window.print()}
+              className="flex-1 whitespace-nowrap sm:flex-none"
+            >
+              🖨 <span className="sm:hidden">Print</span>
+              <span className="hidden sm:inline">Print / Save PDF</span>
+            </Button>
+          </div>
         }
       />
-      <div className="grid gap-6 p-8 xl:grid-cols-[380px_1fr]">
+      <div className="grid min-w-0 gap-6 p-4 sm:p-8 xl:grid-cols-[380px_1fr]">
         {/* -------------------------------------------------------- editor */}
-        <div className="no-print space-y-6">
+        <div className="no-print min-w-0 space-y-6">
           <Card title="Client details">
             <div className="grid gap-4">
               <Field label="Client company">
@@ -59,7 +65,7 @@ export default function BidPage() {
                   onChange={(e) => setClient({ contactName: e.target.value })}
                 />
               </Field>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Email">
                   <TextInput
                     value={client.email}
@@ -86,7 +92,7 @@ export default function BidPage() {
 
           <Card title="Proposal terms">
             <div className="grid gap-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Proposal #">
                   <TextInput
                     value={bid.proposalNumber}
@@ -163,7 +169,7 @@ export default function BidPage() {
         </div>
 
         {/* --------------------------------------------------- live preview */}
-        <div className="rounded-xl bg-slate-100 p-4 print:bg-white print:p-0">
+        <div className="min-w-0 overflow-x-auto rounded-xl bg-slate-100 p-4 print:overflow-visible print:bg-white print:p-0">
           <ProposalDocument
             includeExtras={includeExtras}
             includeScope={includeScope}

@@ -90,7 +90,7 @@ export default function AccountPage() {
   return (
     <>
       <PageHeader title="My Account" subtitle="Your personal profile and login" />
-      <div className="grid gap-6 p-8 lg:grid-cols-2">
+      <div className="grid gap-6 p-4 sm:p-8 lg:grid-cols-2">
         <Card title="Profile">
           <div className="grid gap-4">
             <Field label="Name">
