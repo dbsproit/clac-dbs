@@ -5,6 +5,7 @@ import type { NextAuthConfig } from "next-auth";
  * this is loaded by middleware.ts which runs on the Edge runtime.
  */
 export const authConfig: NextAuthConfig = {
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
   providers: [],
